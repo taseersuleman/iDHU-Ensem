@@ -772,16 +772,17 @@ try:
                 seq = keeper[i]
                 allFVs.append(calcFV(seq.lower()))
 
-            with open('./IISequence_FVs_for_test.csv', mode='w') as fvFile:
-                fvWriter = csv.writer(fvFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-                for fv in allFVs:
-                    fvWriter.writerow(fv)
+            #with open('./IISequence_FVs_for_test.csv', mode='w') as fvFile:
+             #   fvWriter = csv.writer(fvFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+              #  for fv in allFVs:
+               #     fvWriter.writerow(fv)
 
             np.random.seed(5)
             inputSize = 522
             outputcol = inputSize + 1
             # dataset = np.genfromtxt("IISequence_FVs_for_test.csv", delimiter=",", dtype=float)
-            df = pd.read_csv("IISequence_FVs_for_test.csv", sep=',', header=None)
+            #df = pd.read_csv("IISequence_FVs_for_test.csv", sep=',', header=None)
+            df = pd.DataFrame(allFVs)
             W = df.iloc[:, :].values
             Y = df.iloc[:, -1].values
             # W = dataset[:, 0:inputSize]
