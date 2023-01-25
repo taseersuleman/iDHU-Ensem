@@ -802,7 +802,7 @@ try:
                 st.subheader("Sequence")
                 st.write(keeper[i])
 
-                if output_proba[i] > 0.5:
+                if output_proba[i] > 0.3:
                     st.info("Output =  D-site")
                 else:
                     st.info("Output = Non-D-site")
