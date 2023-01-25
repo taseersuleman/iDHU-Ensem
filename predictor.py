@@ -710,7 +710,7 @@ try:
 
     def input_seq():
         st.subheader("Input Sequence of any length")
-        sequence1 = st.text_area("Sequence Input", height=200)
+        sequence1 = st.text_area("Sequence Input", height=20)
         abc = []
         if st.button("Submit"):
 
@@ -772,24 +772,23 @@ try:
                 seq = keeper[i]
                 allFVs.append(calcFV(seq.lower()))
 
-            #with open('./IISequence_FVs_for_test.csv', mode='w') as fvFile:
-             #   fvWriter = csv.writer(fvFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-              #  for fv in allFVs:
-               #     fvWriter.writerow(fv)
+            with open('./IISequence_FVs_for_test.csv', mode='w') as fvFile:
+                fvWriter = csv.writer(fvFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                for fv in allFVs:
+                    fvWriter.writerow(fv)
 
             np.random.seed(5)
             inputSize = 522
             outputcol = inputSize + 1
             # dataset = np.genfromtxt("IISequence_FVs_for_test.csv", delimiter=",", dtype=float)
-            #df = pd.read_csv("IISequence_FVs_for_test.csv", sep=',', header=None)
-            df = pd.DataFrame(allFVs)
+            df = pd.read_csv("IISequence_FVs_for_test.csv", sep=',', header=None)
             W = df.iloc[:, :].values
             Y = df.iloc[:, -1].values
             # W = dataset[:, 0:inputSize]
             # Y = dataset[:, -1]
             std_scale = StandardScaler().fit(W)
             W = std_scale.transform(W)
-            load_model = pickle.load(open('Ensem_D_model.pkl', 'rb'))
+            load_model = pickle.load(open('DHU-Prediction-app.pkl', 'rb'))
             pred = load_model.predict(W)
             output_proba = load_model.predict_proba(W)[:, 1]
 
